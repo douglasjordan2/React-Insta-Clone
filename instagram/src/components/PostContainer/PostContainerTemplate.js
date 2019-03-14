@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import uuid from 'uuid';
+import moment from 'moment';
 import CommentSection from '../CommentSection/CommentSectionTemplate';
 
 export default class PostContainerTemplate extends Component {
@@ -75,7 +76,13 @@ export default class PostContainerTemplate extends Component {
             comment = { comment }
           />
         )) }
-        <span style = { time }>{ timestamp }</span>
+        <span style = { time }>
+          { 
+            (() => {
+              return moment(timestamp).startOf('hour').fromNow() 
+            })()
+          }
+        </span>
         <div style = { textbox }>
           <input 
             type="text"
