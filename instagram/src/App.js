@@ -39,6 +39,7 @@ class App extends Component {
         <SearchBar 
           handleChange = { this.handleChange }
           searchPosts = { this.searchPosts }
+          search = { this.state.search }
         />
         {this.state.dummyData.map(data => (
           <PostContainer 
