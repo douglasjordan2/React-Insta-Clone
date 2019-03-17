@@ -20,11 +20,23 @@ export default class SearchBarTemplate extends Component {
             class="fas fa-search"
             style = { searchIcon }
           ></i>
-          <input 
-            type="text"
-            placeholder='Search' 
-            style = { search }
-          />
+          <form onSubmit = { this.props.searchPosts }>
+            <input 
+              type="text"
+              name="search"
+              onChange={ this.props.handleChange }
+              value={ this.props.search }
+              placeholder='Search' 
+              style = { search }
+            />
+            <input 
+              type="submit"
+              style = {{
+                position: 'absolute',
+                left: '-9999px'
+              }}
+            />
+          </form>
         </div>
         <div
           style = { iconSmall }
