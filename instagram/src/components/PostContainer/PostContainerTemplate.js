@@ -88,6 +88,7 @@ export default class PostContainerTemplate extends Component {
         <CommentSection 
           comments = { this.state.data.comments } 
           timestamp = { this.state.data.timestamp }
+          username = { this.props.username }
         />
       </div>
     )

@@ -8,7 +8,7 @@ import Comment from './Comment';
 export default class CommentSectionTemplate extends Component {
   state = {
     comments: [],
-    username: 'douglas',
+    username: this.props.username,
     text: '',
     timestamp: moment(this.props.timestamp).fromNow()
   }
