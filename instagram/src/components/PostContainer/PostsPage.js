@@ -1,8 +1,14 @@
 import React, { Component } from 'react';
+import styled, { css } from 'styled-components';
 import dummyData from '../../dummy-data';
 import uuid from 'uuid';
 import SearchBar from '../SearchBar/SearchBarTemplate';
 import PostContainer from './PostContainerTemplate';
+
+const PageContainer = styled.div`
+  width: 600px;
+  margin: 10px;
+`;
 
 export default class PostsPage extends Component {
   state = {
@@ -34,7 +40,7 @@ export default class PostsPage extends Component {
 
   render() {
     return (
-      <div style = { pageContainer }>
+      <PageContainer>
         <SearchBar 
           handleChange = { this.handleChange }
           searchPosts = { this.searchPosts }
@@ -48,12 +54,7 @@ export default class PostsPage extends Component {
             username = { this.state.username }
           />
         ))}
-      </div>
+      </PageContainer>
     );
   }
-}
-
-const pageContainer = {
-  width: '600px',
-  margin: '10px'
 }

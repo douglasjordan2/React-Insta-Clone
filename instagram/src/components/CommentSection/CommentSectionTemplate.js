@@ -50,8 +50,8 @@ export default class CommentSectionTemplate extends Component {
         ))}
         <AddComment 
           text = { this.state.text }
-          handleChange = { this.handleChange }
-          submit = { this.submit }
+          handleChange = { event => this.handleChange(event) }
+          submit = { event => this.submit(event) }
           timestamp = { this.state.timestamp }
         />
       </>

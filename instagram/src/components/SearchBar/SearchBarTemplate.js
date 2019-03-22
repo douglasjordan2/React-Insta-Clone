@@ -1,106 +1,108 @@
 import React, { Component } from 'react';
+import styled, { css } from 'styled-components';
+
+const NavContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  height: 50px;
+  align-items: center;
+  border-bottom: 1px solid lightgray;
+  padding: 0 10px;
+`;
+
+const Left = styled.div`
+  display: flex;
+  font-size: 1.5rem;
+`;
+
+const InstagramLogo = styled.img`
+  height: 25px;
+  margin-left: 10px;
+`;
+
+const Middle = styled.div`
+  width: 25%;
+  position: relative;
+  height: 30px;
+  margin-top: 5px;
+  margin-right: 5%;
+`;
+
+const Search = styled.input`
+  text-align: center;
+  padding-left: 13px;
+  width: 100%;
+`;
+
+const Submit = styled.input`
+  position: absolute;
+  left: -9999px
+`;
+
+const Icon = styled.i``;
+
+const SearchIcon = styled(Icon)`
+  position: absolute;
+  left: calc(50% - 13px);
+  font-size: 0.5rem;
+  top: 7px;
+  color: gray;
+`;
+
+const Form = styled.form``;
+
+const IconSmall = styled.div`
+  width: 12%;
+  display: flex;
+  justify-content: space-between;
+  font-size: 1rem;
+  opacity: 0.8;
+`;
 
 export default class SearchBarTemplate extends Component {
   render() {
     return (
-      <div style = { navContainer }>
-        <div style = { left }>
+      <NavContainer>
+        <Left>
           <i 
             class="fab fa-instagram"
           ></i>&nbsp;
-          <div style = {{ verticalLine }}></div>
-          <img 
+          <InstagramLogo 
             src = { require('./views/ig_search_bar.png') }
             alt = "instagram"
-            style = { img }
           />
-        </div>
-        <div style = { middle }>
-          <i 
-            class="fas fa-search"
-            style = { searchIcon }
-          ></i>
-          <form onSubmit = { this.props.searchPosts }>
-            <input 
+        </Left>
+        <Middle>
+          <SearchIcon
+            className="fas fa-search"
+          ></SearchIcon>
+          <Form 
+            onSubmit = { this.props.searchPosts }
+          >
+            <Search 
               type="text"
               name="search"
               onChange={ this.props.handleChange }
               value={ this.props.search }
-              placeholder='Search' 
-              style = { search }
+              placeholder='Search'
             />
-            <input 
+            <Submit
               type="submit"
-              style = {{
-                position: 'absolute',
-                left: '-9999px'
-              }}
             />
-          </form>
-        </div>
-        <div
-          style = { iconSmall }
-        >
-          <i class="far fa-compass"></i>
-          <i class="far fa-heart"></i>
-          <i class="far fa-user"></i>
-        </div>
-      </div>
+          </Form>
+        </Middle>
+        <IconSmall>
+          <Icon 
+            className="far fa-compass"
+          ></Icon>
+          <Icon 
+            className="far fa-heart"
+          ></Icon>
+          <Icon 
+            className="far fa-user"
+          ></Icon>
+        </IconSmall>
+      </NavContainer>
     )
   }
-}
-
-const navContainer = {
-  display: 'flex',
-  justifyContent: 'space-between',
-  height: '50px',
-  alignItems: 'center',
-  borderBottom: '1px solid lightgray',
-  padding: '0 10px'
-}
-
-const left = {
-  display: 'flex',
-  fontSize: '1.5rem'
-}
-
-const verticalLine = {
-  border: '6px solid green',
-  width: '5px',
-  height: '50px'
-}
-
-const img = {
-  height: '25px',
-  marginLeft: '10px'
-}
-
-const middle = {
-  width: '25%',
-  position: 'relative',
-  height: '30px',
-  marginTop: '5px',
-  marginRight: '5%'
-}
-
-const search = {
-  textAlign: 'center',
-  paddingLeft: '13px',
-  width: '100%',
-}
-
-const searchIcon = {
-  position: 'absolute',
-  left: 'calc(50% - 13px)',
-  fontSize: '0.5rem',
-  top: '7px',
-  color: 'gray'
-}
-
-const iconSmall = {
-  width: '12%',
-  display: 'flex',
-  justifyContent: 'space-between',
-  fontSize: '1rem',
-  opacity: '0.8'
 }

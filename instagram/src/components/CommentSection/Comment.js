@@ -1,4 +1,9 @@
 import React, { Component } from 'react'
+import styled, { css } from 'styled-components';
+
+const Username = styled.span`
+  font-weight: bold;
+`;
 
 export default class Comment extends Component {
   state = {
@@ -13,10 +18,8 @@ export default class Comment extends Component {
     const { username, text } = this.state.comment
     return (
       <div>
-        <span style = {{
-          fontWeight: 'bold'
-          }}>{ username }
-        </span>&nbsp;
+        <Username>{ username }
+        </Username>&nbsp;
         { text }
       </div>
     )

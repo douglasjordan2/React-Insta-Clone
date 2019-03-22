@@ -1,4 +1,42 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import styled, { css } from 'styled-components';
+
+const PageContainer = styled.div`
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+`;
+
+const Logo = styled.div`
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 20px;
+  width: 100%;
+  margin-bottom: 10px;
+`;
+
+const Input = styled.input`
+  padding: 5px;
+  margin: 5px 0;
+`;
+
+const Camera = styled.i`
+  font-size: 1.3rem;
+`;
+
+const InstagramLogo = styled.img`
+  width: 100px;
+`;
 
 export default class Login extends Component {
   state = {
@@ -23,81 +61,38 @@ export default class Login extends Component {
 
   render() {
     return (
-      <div style = { loginPage }>
-        <form 
-          onSubmit = { this.login }
-          style = { loginForm }
+      <PageContainer>
+        <Form
+          onSubmit = { () => this.login() }
         >
-        <div style = {{
-          display: 'flex',
-          justifyContent: 'space-around',
-          alignItems: 'center',
-          height: '20px',
-          width: '100%',
-          marginBottom: '10px'
-        }}>
-          <i 
-            class="fab fa-instagram"
-            style = {{
-              fontSize: '1.3rem'
-            }}
-          ></i>
-          <img 
-            src = { require('../SearchBar/views/ig_search_bar.png') }
-            alt="logo"
-            style = {{
-              width: '100px'
-            }}
-          />
-        </div>
-          <input 
-            type="text"
+          <Logo>
+            <Camera
+              className="fab fa-instagram"
+            ></Camera>
+            <InstagramLogo
+              src = { require('../SearchBar/views/ig_search_bar.png') }
+              alt="logo"
+            />
+          </Logo>
+        
+          <Input
             name="username"
-            value={this.state.username}
-            onChange={this.handleChange}  
-            placeholder='Username'
-            style = { input }
+            placeholder="Username"
+            value = { this.state.username }
+            onChange = { this.handleChange }
           />
-          <input 
+          <Input 
             type="password"  
             name="password"
+            placeholder="Password"
             value={this.state.password}
-            onChange={this.handleChange} 
-            placeholder='Password'
-            style = { input }
+            onChange = { this.handleChange }
           />
-          <div>
-            <input 
-              type="submit"
-              style = { submit }
-            />
-          </div>
-        </form>
-      </div>
+          <Input 
+            type="submit"
+          />
+        </Form>
+      </PageContainer>
     )
   }
-}
-
-const loginPage = {
-  height: '100vh',
-  width: '100vw',
-  overflow: 'hidden',
-  display: 'flex',
-  justifyContent: 'center',
-  alignItems: 'center'
-}
-
-const loginForm = {
-  display: 'flex',
-  flexDirection: 'column',
-  alignItems: 'flex-end'
-}
-
-const input = {
-  padding: '5px',
-  margin: '5px 0'
-}
-
-const submit = {
-  width: '100%'
 }

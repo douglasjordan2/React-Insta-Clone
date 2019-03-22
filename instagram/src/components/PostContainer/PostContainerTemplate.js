@@ -1,6 +1,62 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import CommentSection from '../CommentSection/CommentSectionTemplate';
+import styled, { css } from 'styled-components';
+
+const Container = styled.div`
+  border: 1px solid lightgray;
+  border-radius: 4px;
+  padding: 5px;
+  margin-bottom: 10px;
+`;
+
+const Header = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
+const Avatar = styled.img`
+  border-radius: 50%;
+  width: 10%;
+  margin: 10px 20px;
+`;
+
+const Username = styled.span`
+  font-eight: bold;
+`;
+
+const PostImg = styled.img`
+  width: 100%;
+`;
+
+const PostInfo = styled.div`
+  font-size: 1.5rem;
+  padding: 5px;
+`;
+
+function LikeIcon(props) {
+  const LikeIcon = styled.i`
+    color: ${ props.liked ? 'red' : 'black'};
+    cursor: pointer;
+  `;
+
+  return (
+    <LikeIcon
+      liked = { props.liked }
+      className = { props.className }
+      onClick = { () => props.onClick() }
+    ></LikeIcon>
+  )
+}
+
+const CommentIcon = styled.i`
+  transform: scaleX(-1);
+`;
+
+const Likes = styled.div`
+  font-weight: bold;
+  font-size: 0.9rem;
+`;
 
 export default class PostContainerTemplate extends Component {
   state = {
@@ -13,13 +69,6 @@ export default class PostContainerTemplate extends Component {
     this.setState({ data: this.props.data, likes: this.props.likes })
   }
 
-  likeStyle = liked => {
-    return({
-      color: liked ? 'red' : 'black',
-      cursor: 'pointer',
-    })
-  }
-
   likePost = () => {
     this.setState({ like: !this.state.like })
 
@@ -30,67 +79,40 @@ export default class PostContainerTemplate extends Component {
     this.setState({ likes: this.state.like ? this.state.likes -= 1 : this.state.likes += 1 })
   }
 
-  render() { console.log(this.props)
+  render() {
     const { username, thumbnailUrl, imageUrl } = this.state.data
     return (
-      <div style = {{
-        border: '1px solid lightgray',
-        borderRadius: '4px',
-        padding: '5px',
-        marginBottom: '10px'
-      }}>
-        <div style = {{
-          display: 'flex',
-          alignItems: 'center',
-        }}>
-          <img 
+      <Container>
+        <Header>
+          <Avatar 
             src={ thumbnailUrl } 
             alt="thumbnail"
-            style = {{
-              borderRadius: '50%',
-              width: '10%',
-              margin: '10px 20px'
-            }}
           />
-          <span style = {{
-            fontWeight: 'bold'
-          }}>{ username }</span>
-        </div>
-        <img 
+          <Username>{ username }</Username>
+        </Header>
+        <PostImg 
           src={ imageUrl } 
-          alt="post" 
-          style = {{
-            width: '100%'
-          }}
+          alt="post"
         />
-        <div style = {{
-          fontSize: '1.5rem',
-          padding: '5px'
-        }}>
-          <i 
-            class="far fa-heart"
-            style = { this.likeStyle(this.state.like) }
+        <PostInfo>
+          <LikeIcon 
+            className="far fa-heart"
             onClick = { this.likePost }
-          ></i>&nbsp;&nbsp;&nbsp;
-          <i 
-            class="far fa-comment"
-            style = {{ 
-              transform: 'scaleX(-1)'
-            }}
-          ></i>
-          <div style = {{
-            fontWeight: 'bold',
-            fontSize: '0.9rem'
-          }}>
+            liked = { this.state.like }
+          ></LikeIcon>&nbsp;&nbsp;&nbsp;
+          <CommentIcon 
+            className="far fa-comment"
+          ></CommentIcon>
+          <Likes>
             { this.state.likes } likes
-          </div>
-        </div>
+          </Likes>
+        </PostInfo>
         <CommentSection 
           comments = { this.state.data.comments } 
           timestamp = { this.state.data.timestamp }
           username = { this.props.username }
         />
-      </div>
+      </Container>
     )
   }
 }

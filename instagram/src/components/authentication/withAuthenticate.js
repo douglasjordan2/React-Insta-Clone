@@ -7,7 +7,6 @@ const withAuthenticate = Posts => Login => class extends React.Component {
 
   componentDidMount() {
     const username = localStorage.getItem('username');
-    console.log(username)
 
     this.setState({ loggedIn: username !== null ? true : false })
   }
